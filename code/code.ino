@@ -12,13 +12,13 @@
 
 //saved nales
 std::map<String, String> uidToName = {
-  {"4:15:35:82:db:14:90", "Mikhail"},
-  {"72:e9:fa:3", "Bob"},
+  {"...", "..."},
+
 };
 
 // Wi-Fi access parameters
-const char* ssid = "Iphone Misha";
-const char* password = "123iot123iot";
+const char* ssid = "...";
+const char* password = "...";
 
 // Set static IP address
 //IPAddress local_IP(172, 20, 10, 50);  
