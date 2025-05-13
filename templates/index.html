@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RFID Leaderboard</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; padding: 2em; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 10px; border: 1px solid #ccc; }
+    th { background: #4CAF50; color: white; }
+  </style>
+</head>
+<body>
+  <h1> RFID Leaderboard</h1>
+  <table id="leaderboard">
+  <thead>
+    <tr><th>Rank</th><th>Name</th><th>Time</th><th>Device</th></tr>
+  </thead>
+  <tbody id="table-body">
+    <!-- rows will be inserted here by JavaScript -->
+  </tbody>
+</table>
+
+<script> 
+
+async function updateTable() {
+  try {
+    const res = await fetch("/data");
+    const data = await res.json();
+    const tbody = document.getElementById("table-body");
+    tbody.innerHTML = "";
+
+    data.forEach((row, index) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${row.uid}</td>
+        <td>${row.time}</td>
+        <td>${row.source}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    console.error("⚠ Failed to update table:", err);
+  }
+}
+
+updateTable();                   // initial call
+setInterval(updateTable, 1000);  // every 1 sec
+
+</script>
+  
+</body>
+</html>
